@@ -17,6 +17,69 @@ Getting Started
 7. Install passenger with apache or ngnix
 8. Start to web server
 
+
+Running with docker
+===============
+
+Initial setup
+---------------
+
+Please ensure you are using Docker Compose V2.
+
+Remember to rewrite the .example files with your data.
+
+```
+cp .env.example .env
+cp config/database.yml.example config/database.yml
+cp config/site.yml.example config/site.yml
+cp config/mail.yml.example config/mail.yml
+docker compose build
+docker compose run --rm salva rake db:create
+docker compose run --rm salva rake db:migrate
+docker compose run --rm salva rake db:seed
+```
+
+When seed data, the admin user is created.
+
+Running the Rails app
+---------------
+
+```
+docker compose up
+```
+
+Running the Rails console
+---------------
+When the app is already running with `docker-compose` up, attach to the container:
+```
+docker compose exec salva script/rails c
+```
+
+When no container running yet, start up a new one:
+```
+docker compose run --rm salva script/rails c
+```
+
+Special routes
+===============
+
+For admin:
+```
+/admin
+```
+For library or similar:
+```
+/ibrarian/admin
+```
+For annuals and plans reports review:
+```
+/department
+```
+For researchers to approve reports from academic technicians:
+```
+/academic
+```
+
 Authors
 =======
 
