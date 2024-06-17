@@ -1,15 +1,15 @@
 GIT
-  remote: git://github.com/monsterlabs/scope_by_fuzzy.git
-  revision: a185104a67de5d6ee75019d4d1041c212fdb27cd
-  specs:
-    scope_by_fuzzy (0.0.3)
-
-GIT
   remote: https://github.com/michelson/lazy_high_charts
   revision: f7d4d1614816c98d81d9d7d387d4b6e0a9901d05
   specs:
     lazy_high_charts (1.5.5)
       hash-deep-merge
+
+GIT
+  remote: https://github.com/monsterlabs/scope_by_fuzzy.git
+  revision: a185104a67de5d6ee75019d4d1041c212fdb27cd
+  specs:
+    scope_by_fuzzy (0.0.3)
 
 GEM
   remote: https://rubygems.org/
@@ -341,6 +341,9 @@ GEM
       railties (>= 3.0)
       rspec (~> 2.11.0)
     rtf (0.3.3)
+    rtf_rails (0.0.1)
+      rails (>= 3.0.0)
+      rtf (~> 0.3.3)
     ruby-ole (1.2.11.8)
     ruby-rc4 (0.1.5)
     ruby_parser (2.3.1)
@@ -499,3 +502,6 @@ DEPENDENCIES
   tzinfo (= 0.3.33)
   uglifier (~> 1.2.7)
   unicorn (= 4.3.1)
+
+BUNDLED WITH
+   1.17.3
