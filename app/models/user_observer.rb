@@ -4,13 +4,15 @@ class UserObserver < ActiveRecord::Observer
   
   def after_create(user)
     jp = Jobposition.most_recent_jp(user.id)
-    u_id = user.id
-    a_id = jp.user_adscription.adscription_id if user.has_adscription?
-    j_id = jp.id
-    year = Time.now.year
-    create_ldap_user(user) if User.ldap_enabled?
-    UserAdscriptionRecord.create(:user_id=>u_id,:adscription_id=>a_id,:jobposition_id=>j_id,:year=>year)
-    Notifier.identification_card_request(user.id).deliver
+    if jp
+      u_id = user.id
+      a_id = jp.user_adscription.adscription_id if user.has_adscription?
+      j_id = jp.id
+      year = Time.now.year
+      create_ldap_user(user) if User.ldap_enabled?
+      UserAdscriptionRecord.create(:user_id=>u_id,:adscription_id=>a_id,:jobposition_id=>j_id,:year=>year)
+      Notifier.identification_card_request(user.id).deliver
+    end
   end
 
   def after_update(user)
