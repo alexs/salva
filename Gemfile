@@ -23,7 +23,7 @@ gem "iconv", "1.0.4"
 
 # Searching and tagging
 gem "tsearch", :require => "texticle"
-gem "scope_by_fuzzy", :git => "git://github.com/monsterlabs/scope_by_fuzzy.git"
+gem "scope_by_fuzzy", :git => "https://github.com/monsterlabs/scope_by_fuzzy.git"
 
 # Control version
 gem "simple-navigation", "3.8.0"
