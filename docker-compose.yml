@@ -1,0 +1,35 @@
+services:
+  salva:
+    build:
+      context: ./
+      dockerfile: development.Dockerfile
+    command: bash -c "script/rails s -p 3000 -b '0.0.0.0'"
+    volumes:
+      - .:/usr/src/salva
+      - bundle:/usr/local/bundle
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env
+    environment:
+      - HISTFILE=/usr/src/salva/log/.bash_history 
+    depends_on:
+      db:
+        condition: service_healthy
+  db:
+    image: postgres:9.5
+    environment:
+      POSTGRES_USER: ${PGUSER}
+      POSTGRES_PASSWORD: ${PGPASSWORD}
+    ports:
+      - "5432:5432"
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    healthcheck:
+      test: pg_isready -U postgres
+      interval: 2s
+      timeout: 5s
+      retries: 30
+volumes:
+  pg_data:
+  bundle:
