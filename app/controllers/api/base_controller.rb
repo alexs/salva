@@ -3,7 +3,9 @@ class Api::BaseController < ActionController::Base
   include Salva::SiteConfig
 
   # skip_before_filter :authenticate_user!
-  before_filter :hosts_allow!
+
+  # temporally disable for coa testing live code presentation
+  # before_filter :hosts_allow! 
 
   respond_to :xml
 

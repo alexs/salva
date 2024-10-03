@@ -2,7 +2,7 @@
 class Indivadvice < ActiveRecord::Base
   attr_accessible :indivname, :institution_id, :startyear, :startmonth, :endyear, :endmonth,
                   :hours, :indivadvicetarget_id, :career_attributes,
-                  :institution_id, :university_id, :country_id, :degree_id, :career_id
+                  :institution_id, :university_id, :country_id, :degree_id, :career_id, :registered_by_id, :user_id, :status_id
 
   validates_presence_of :indivadvicetarget_id, :indivname, :startyear, :hours
   validates_numericality_of :indivadvicetarget_id
@@ -32,6 +32,14 @@ class Indivadvice < ActiveRecord::Base
   scope :professors, where('indivadvicetarget_id > 3')
   scope :degree_id, lambda { |id| where("degree_id = ?", id) }
   scope :adscription_id, lambda { |id| joins(:user => :user_adscription).where(:user => { :user_adscription => { :adscription_id => id} }) }
+  scope :active_students, -> {
+    today = Date.today
+    students.where(
+      '(startyear < ? OR (startyear = ? AND startmonth <= ?)) AND
+       (endyear > ? OR (endyear = ? AND endmonth >= ?))',
+      today.year, today.year, today.month, today.year, today.year, today.month
+    )
+  }
 
   search_methods :degree_id, :adscription_id
 

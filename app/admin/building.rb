@@ -10,7 +10,7 @@ ActiveAdmin.register Building do
 
   form do |f|
     f.inputs do
-      f.input :id, :as => :hidden, :value => f.object.id || Building.last.id+1
+      f.input :id, :as => :hidden, :value => f.object.id || Building.last.id+1 if Building.last
       f.input :name, :as => :string
     end
     f.buttons

@@ -1,6 +1,16 @@
 .row{:id => dom_id(record), :class =>  cycle('record-odd', 'record-even')}
   .span-1= checkbox_to_del(record)
-  .span-11= record.to_s
+  .span-9= record.to_s
+  .span-2
+    - if record && record.status_id == 2
+      = simple_form_for record, url: student_advice_path(:id => record.id), method: :put do |f|
+        = f.hidden_field :status_id, value: 1
+        = f.button :submit, "Aprobar", class: "action_link"
+    - elsif record && record.status_id == 1
+      Aceptado
+    - elsif record.status_id == nil
+      No verificado
+
   .action= link_to_show student_advice_path(:id => record.id)
   .action= link_to_edit edit_student_advice_path(:id => record.id)
   .action.last= link_to_delete record, student_advice_path(:id => record.id)

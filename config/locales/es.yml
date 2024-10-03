@@ -5,7 +5,7 @@ es:
         one: Usuario
         other: Usuarios
       person: 
-       one: Información personal
+       one: Información wpersonal
        other: Personas
       academicprogram:
         one: Programa académico
@@ -717,6 +717,7 @@ es:
         endmonth: Mes de conclusión
         hours: Horas
         indivadvicetarget: Objetivo
+        fullname: Académico
       instadvice:
         title: Título
         instadvicetarget: Objetivo
